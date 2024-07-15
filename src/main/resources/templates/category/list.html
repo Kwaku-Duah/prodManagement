@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category List</title>
+    <link rel="stylesheet" th:href="@{/styles/mainc.css}"/>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/categories">Categories</a></li>
+    </ul>
+</nav>
+
+<h1>Categories</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.name}">Category Name</td>
+        <td><a th:href="@{/categories/{id}(id=${category.id})}">View Products</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

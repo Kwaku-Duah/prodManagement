@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Products in ' + ${category.name}">Category Products</title>
+    <link rel="stylesheet" th:href="@{/styles/mainc.css}"/>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/categories">Categories</a></li>
+    </ul>
+</nav>
+
+<h1 th:text="'Products in ' + ${category.name}">Products in Category</h1>
+<a th:href="@{/categories}">Back to Categories</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.description}">Description</td>
+        <td th:text="${product.price}">Price</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
