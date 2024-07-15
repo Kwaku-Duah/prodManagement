@@ -15,6 +15,10 @@ public class AuthService {
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    
+    /** 
+     * @param auth
+     */
     public void saveUser(Auth auth) {
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authRepository.save(auth);

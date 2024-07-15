@@ -14,11 +14,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    
+    /** 
+     * @param http
+     * @return SecurityFilterChain
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/auth/signup", "/auth/signin", "/products/**","/categories/**", "/static/**", "/styles/**", "/js/**").permitAll() // Allow access to signup, signin, products, and static resources
+                .requestMatchers("/auth/signup", "/auth/signin", "/products/**","/categories/**", "/static/**","/swagger-ui.html", "/styles/**", "/js/**").permitAll() // Allow access to signup, signin, products, and static resources
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin

@@ -16,6 +16,11 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    
+    /** 
+     * @param model
+     * @return String
+     */
     @GetMapping
     public String getAllCategories(Model model) {
         model.addAttribute("categories", categoryService.findAll());

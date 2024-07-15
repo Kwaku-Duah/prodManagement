@@ -25,6 +25,10 @@ public class BinaryTree {
         }
     }
 
+    
+    /** 
+     * @param product
+     */
     private void add(Product product) {
         root = addRecursive(root, product);
     }

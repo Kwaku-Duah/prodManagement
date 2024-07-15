@@ -15,6 +15,10 @@ public class Auth {
     private String email;
     private String password;
 
+    
+    /** 
+     * @return Long
+     */
     // Getters and setters
     public Long getId() {
         return id;

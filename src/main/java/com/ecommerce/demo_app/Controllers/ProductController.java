@@ -23,6 +23,11 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
+    
+    /** 
+     * @param model
+     * @return String
+     */
     @GetMapping
     public String getAllProducts(
         @RequestParam(defaultValue = "0") int page,

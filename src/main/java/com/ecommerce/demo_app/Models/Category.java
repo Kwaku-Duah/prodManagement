@@ -19,6 +19,10 @@ public class Category {
     @JsonIgnoreProperties("category") 
     private List<Product> products;
 
+    
+    /** 
+     * @return Long
+     */
     // Getters and Setters
     public Long getId() {
         return id;

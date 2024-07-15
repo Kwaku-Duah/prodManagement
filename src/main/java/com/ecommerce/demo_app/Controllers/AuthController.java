@@ -17,6 +17,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    
+    /** 
+     * @param model
+     * @return String
+     */
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
         model.addAttribute("auth", new Auth());
