@@ -17,10 +17,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    
-    /** 
-     * @param model
-     * @return String
+    /**
+     * Displays the signup form.
+     * 
+     * @param model the model to hold form attributes
+     * @return the signup form view
      */
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
@@ -28,6 +29,13 @@ public class AuthController {
         return "authuser/signup";
     }
 
+    /**
+     * Handles user signup.
+     * 
+     * @param auth the auth model attribute
+     * @param model the model to hold form attributes and error messages
+     * @return redirect to signin form on success, otherwise return to signup form
+     */
     @PostMapping("/signup")
     public String signup(@ModelAttribute Auth auth, Model model) {
         if (authService.findByEmail(auth.getEmail()) != null) {
@@ -38,12 +46,25 @@ public class AuthController {
         return "redirect:/authuser/signin";
     }
 
+    /**
+     * Displays the signin form.
+     * 
+     * @param model the model to hold form attributes
+     * @return the signin form view
+     */
     @GetMapping("/signin")
     public String showSigninForm(Model model) {
         model.addAttribute("auth", new Auth());
         return "authuser/signin";
     }
 
+    /**
+     * Handles user signin.
+     * 
+     * @param auth the auth model attribute
+     * @param model the model to hold form attributes and error messages
+     * @return redirect to products page on success, otherwise return to signin form
+     */
     @PostMapping("/signin")
     public String signin(@ModelAttribute Auth auth, Model model) {
         Auth existingUser = authService.findByEmail(auth.getEmail());

@@ -19,7 +19,7 @@ This project is an E-Commerce Product Management System built using Spring Boot.
 
 ### Prerequisites
 
-- Java 17 or higher
+- Java 21
 - Maven
 - PostgreSQL
 
@@ -36,7 +36,7 @@ server.error.include-message=always
 server.error.include-binding-errors=always
 spring.datasource.url=jdbc:postgresql://localhost:5432/ecommerce
 spring.datasource.username=postgres
-spring.datasource.password=duaSHKH!229
+spring.datasource.password=passPassword
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.properties.hibernate.format-sql=true
@@ -93,7 +93,6 @@ spring.datasource.password=prodPassword
 - Custom Queries using JPQL and native SQL
 - Profiles and external configuration
 - Monitoring with Spring Boot Actuator
-- Global Exception Handling with `@ControllerAdvice`
 - Interceptors for Logging and Authentication
 
 ## API Endpoints
@@ -124,4 +123,4 @@ spring.datasource.password=prodPassword
 - **Services:** Contain business logic
 - **Repositories:** Interface with the database
 - **Models:** Define the structure of data
-- **Utils:** Utility classes (e.g., Binary Tree)
+- **Utils:** Utility classes 

@@ -1,49 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
+    <meta charset="UTF-8" />
     <title>Product List</title>
-    <link rel="stylesheet" th:href="@{/styles/main.css}"/>
-</head>
-<body>
-<nav>
-    <ul>
+    <link rel="stylesheet" th:href="@{/styles/main.css}" />
+  </head>
+  <body>
+    <nav>
+      <ul>
         <li><a href="/products">Products</a></li>
         <li><a href="/categories">Categories</a></li>
-    </ul>
-</nav>
+        <li><a href="/products/add">Add Product</a></li>
+      </ul>
+    </nav>
 
-<h1 th:if="${category != null}" th:text="'Products in ' + ${category.name}">Products</h1>
-<h1 th:if="${category == null}">Products</h1>
-<a th:if="${category != null}" th:href="@{/categories}">Back to Categories</a>
+    <h1 th:if="${category != null}" th:text="'Products in ' + ${category.name}">
+      Products
+    </h1>
+    <h1 th:if="${category == null}">Products</h1>
+    <a th:if="${category != null}" th:href="@{/categories}"
+      >Back to Categories</a
+    >
 
-<form th:action="@{/products}" method="get">
-    <input type="text" name="keyword" placeholder="Search products..." th:value="${keyword != null} ? ${keyword} : ''"/>
-    <button type="submit">Search</button>
-</form>
+    <form th:action="@{/products}" method="get">
+      <input
+        type="text"
+        name="keyword"
+        placeholder="Search products..."
+        th:value="${keyword != null} ? ${keyword} : ''"
+      />
+      <button type="submit">Search</button>
+    </form>
 
-<table>
-    <thead>
-    <tr>
-        <th><a th:href="@{/products(page=${currentPage}, size=${size}, sortField='name', sortDirection=${sortDirection == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}">Name</a></th>
-        <th><a th:href="@{/products(page=${currentPage}, size=${size}, sortField='description', sortDirection=${sortDirection == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}">Description</a></th>
-        <th><a th:href="@{/products(page=${currentPage}, size=${size}, sortField='price', sortDirection=${sortDirection == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}">Price</a></th>
-        <th>Category</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.name}">Product Name</td>
-        <td th:text="${product.description}">Description</td>
-        <td th:text="${product.price}">Price</td>
-        <td th:text="${product.category.name}">Category</td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <a
+              th:href="@{/products(page=${currentPage}, size=${size}, sortField='name', sortDirection=${sortDirection == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}"
+              >Name</a
+            >
+          </th>
+          <th>
+            <a
+              th:href="@{/products(page=${currentPage}, size=${size}, sortField='description', sortDirection=${sortDirection == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}"
+              >Description</a
+            >
+          </th>
+          <th>
+            <a
+              th:href="@{/products(page=${currentPage}, size=${size}, sortField='price', sortDirection=${sortDirection == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}"
+              >Price</a
+            >
+          </th>
+          <th>Category</th>
+          <th>Actions</th>
+          <!-- Add a column for actions -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product : ${products}">
+          <td th:text="${product.name}">Product Name</td>
+          <td th:text="${product.description}">Description</td>
+          <td th:text="${product.price}">Price</td>
+          <td th:text="${product.category.name}">Category</td>
+          <td>
+            <a
+              th:href="@{/products/edit/{id}(id=${product.id})}"
+              class="btn-link btn-edit"
+              >Edit</a
+            >
+            |
+            <a
+              th:href="@{/products/delete/{id}(id=${product.id})}"
+              class="btn-link btn-delete"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<div>
-    <span th:text="'Page ' + ${currentPage + 1} + ' of ' + ${totalPages}"></span>
-    <a th:if="${currentPage > 0}" th:href="@{/products(page=${currentPage - 1}, size=${size}, sortField=${sortField}, sortDirection=${sortDirection}, keyword=${keyword})}">Previous</a>
-    <a th:if="${currentPage < totalPages - 1}" th:href="@{/products(page=${currentPage + 1}, size=${size}, sortField=${sortField}, sortDirection=${sortDirection}, keyword=${keyword})}">Next</a>
-</div>
-</body>
+    <div>
+      <span
+        th:text="'Page ' + (${currentPage + 1}) + ' of ' + ${totalPages}"
+      ></span>
+      <a
+        th:if="${currentPage > 0}"
+        th:href="@{/products(page=${currentPage - 1}, size=${size}, sortField=${sortField}, sortDirection=${sortDirection}, keyword=${keyword})}"
+        >Previous</a
+      >
+      <a
+        th:if="${currentPage < totalPages - 1}"
+        th:href="@{/products(page=${currentPage + 1}, size=${size}, sortField=${sortField}, sortDirection=${sortDirection}, keyword=${keyword})}"
+        >Next</a
+      >
+    </div>
+  </body>
 </html>

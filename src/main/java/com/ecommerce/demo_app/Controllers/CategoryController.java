@@ -17,15 +17,26 @@ public class CategoryController {
     private CategoryService categoryService;
 
     
-    /** 
-     * @param model
-     * @return String
+    /**
+     * Retrieves and displays all categories.
+     *
+     * @param model the model to hold categories data
+     * @return the categories list view
      */
     @GetMapping
     public String getAllCategories(Model model) {
         model.addAttribute("categories", categoryService.findAll());
         return "category/list";
     }
+
+
+     /**
+     * Retrieves and displays products for a specific category.
+     *
+     * @param id the id of the category
+     * @param model the model to hold category and products data
+     * @return the category products view or redirect to categories list if category not found
+     */
 
     @GetMapping("/{id}")
     public String getCategoryProducts(@PathVariable Long id, Model model) {

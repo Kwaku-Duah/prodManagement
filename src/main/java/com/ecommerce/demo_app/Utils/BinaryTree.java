@@ -9,6 +9,11 @@ public class BinaryTree {
 
     private Node root;
 
+    /**
+     * Constructs a binary tree and adds products to it.
+     *
+     * @param products the list of products to add to the tree
+     */
     public BinaryTree(List<Product> products) {
         for (Product product : products) {
             add(product);
@@ -25,9 +30,10 @@ public class BinaryTree {
         }
     }
 
-    
-    /** 
-     * @param product
+    /**
+     * Adds a product to the binary tree.
+     *
+     * @param product the product to add
      */
     private void add(Product product) {
         root = addRecursive(root, product);
@@ -49,6 +55,12 @@ public class BinaryTree {
         return current;
     }
 
+    /**
+     * Searches for products in the binary tree that contain the specified keyword.
+     *
+     * @param keyword the keyword to search for
+     * @return a list of products that match the keyword
+     */
     public List<Product> search(String keyword) {
         List<Product> result = new ArrayList<>();
         searchRecursive(root, keyword.toLowerCase(), result);

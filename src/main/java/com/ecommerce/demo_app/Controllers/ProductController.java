@@ -23,15 +23,21 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    
-    /** 
-     * @param model
-     * @return String
+    /**
+     * Retrieves and displays a paginated list of all products.
+     *
+     * @param page the page number to retrieve
+     * @param size the number of products per page
+     * @param sortField the field to sort by
+     * @param sortDirection the direction of sorting
+     * @param keyword the keyword to search for
+     * @param model the model to hold products data
+     * @return the products list view
      */
     @GetMapping
     public String getAllProducts(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(defaultValue = "5") int size,
         @RequestParam(defaultValue = "id") String sortField,
         @RequestParam(defaultValue = "asc") String sortDirection,
         @RequestParam(required = false) String keyword,
@@ -54,6 +60,12 @@ public class ProductController {
         return "product/list";
     }
 
+    /**
+     * Displays the form for adding a new product.
+     *
+     * @param model the model to hold product and categories data
+     * @return the add product form view
+     */
     @GetMapping("/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
@@ -61,6 +73,13 @@ public class ProductController {
         return "product/add";
     }
 
+    /**
+     * Retrieves and displays products by category.
+     *
+     * @param id the id of the category
+     * @param model the model to hold category and products data
+     * @return the products list view for the category
+     */
     @GetMapping("/category/{id}")
     public String getProductsByCategory(@PathVariable Long id, Model model) {
         Category category = categoryService.findById(id);
@@ -73,6 +92,13 @@ public class ProductController {
         return "redirect:/categories";
     }
 
+    /**
+     * Displays the form for editing a product.
+     *
+     * @param id the id of the product to edit
+     * @param model the model to hold product and categories data
+     * @return the edit product form view
+     */
     @GetMapping("/edit/{id}")
     public String showEditProductForm(@PathVariable Long id, Model model) {
         Optional<Product> product = productService.findById(id);
@@ -84,6 +110,13 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    /**
+     * Handles adding a new product.
+     *
+     * @param product the product to add
+     * @param categoryId the id of the category for the product
+     * @return redirect to products list view
+     */
     @PostMapping
     public String addProduct(@ModelAttribute Product product, @RequestParam Long categoryId) {
         Category category = categoryService.findById(categoryId);
@@ -94,6 +127,14 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    /**
+     * Handles editing an existing product.
+     *
+     * @param id the id of the product to edit
+     * @param product the updated product details
+     * @param categoryId the id of the category for the product
+     * @return redirect to products list view
+     */
     @PostMapping("/edit/{id}")
     public String editProduct(@PathVariable Long id, @ModelAttribute Product product, @RequestParam Long categoryId) {
         Category category = categoryService.findById(categoryId);
@@ -105,12 +146,25 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    /**
+     * Handles deleting a product.
+     *
+     * @param id the id of the product to delete
+     * @return redirect to products list view
+     */
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteById(id);
         return "redirect:/products";
     }
 
+    /**
+     * Handles searching for products by keyword.
+     *
+     * @param keyword the keyword to search for
+     * @param model the model to hold products data
+     * @return redirect to products list view with search results
+     */
     @GetMapping("/search")
     public String searchProducts(@RequestParam String keyword, Model model) {
         return "redirect:/products?keyword=" + keyword;

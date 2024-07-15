@@ -52,8 +52,6 @@ input[type="text"], select {
 }
 
 button {
-    background-color: #007bff;
-    color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -62,7 +60,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    opacity: 0.8;
 }
 
 a {
@@ -72,6 +70,10 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.table-container {
+    overflow-x: auto;
 }
 
 table {
@@ -91,4 +93,32 @@ th, td {
 
 th {
     background-color: #f2f2f2;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-link {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+}
+
+.btn-link:hover {
+    opacity: 0.8;
+}
+
+.btn-edit {
+    background-color: #007bff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
 }
